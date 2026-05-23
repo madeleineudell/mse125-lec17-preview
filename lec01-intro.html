@@ -1,0 +1,1842 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Introduction to Applied Statistics – Applied Statistics: From Data to Decisions</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./lec02-eda.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-5bd74f5abf3ca6a8719441ebf5fe98d3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lec01-intro.html">Act 1: Build Models</a></li><li class="breadcrumb-item"><a href="./lec01-intro.html"><span class="chapter-title">Introduction to Applied Statistics</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Applied Statistics: From Data to Decisions</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">MS&amp;E 125: Applied Statistics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Act 1: Build Models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec01-intro.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Introduction to Applied Statistics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec02-eda.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Exploratory Data Analysis &amp; Visualization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec03-munging.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Munging: When Data Fights Back</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec04-regression.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">From the Mean to Simple Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec05-feature-engineering.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Multiple Regression and Feature Engineering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec06-validation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Validation and the Bias-Variance Tradeoff</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec07-classification.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Classification — Logistic Regression and Metrics</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Act 2: Trust Models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec08-sampling.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Bootstrap and the Normal Approximation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec09-permutation-tests.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Permutation Tests</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec10-hypothesis-testing.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Hypothesis Testing Framework</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec11-multiple-testing.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Multiple Testing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec12-regression-inference.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Regression Inference + Diagnostics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec12.5-classification-inference.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Classification Meets Inference</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Act 3: See Further</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec13-trees.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Decision Trees and Random Forests</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec14-pca.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">PCA — Dimensionality Reduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec15-clustering.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Clustering — K-Means</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec16-feedback-loops.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Validation beyond the random split</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec17-automl-llms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Working with AI</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec18-causal-inference-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Causal Inference I — DAGs and Confounding</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec19-causal-inference-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Causal Inference II — Natural Experiments and A/B Tests</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-probability.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Appendix: Probability Refresher</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-tools.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Appendix: Computational Tools</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#consequential-decisions-with-data" id="toc-consequential-decisions-with-data" class="nav-link active" data-scroll-target="#consequential-decisions-with-data">Consequential decisions with data</a></li>
+  <li><a href="#what-makes-a-decision-consequential" id="toc-what-makes-a-decision-consequential" class="nav-link" data-scroll-target="#what-makes-a-decision-consequential">What makes a decision consequential?</a></li>
+  <li><a href="#what-is-applied-statistics" id="toc-what-is-applied-statistics" class="nav-link" data-scroll-target="#what-is-applied-statistics">What is applied statistics?</a></li>
+  <li><a href="#four-ways-to-reason-with-data" id="toc-four-ways-to-reason-with-data" class="nav-link" data-scroll-target="#four-ways-to-reason-with-data">Four ways to reason with data</a></li>
+  <li><a href="#the-three-acts-of-this-course" id="toc-the-three-acts-of-this-course" class="nav-link" data-scroll-target="#the-three-acts-of-this-course">The three acts of this course</a></li>
+  <li><a href="#a-first-look-at-real-data" id="toc-a-first-look-at-real-data" class="nav-link" data-scroll-target="#a-first-look-at-real-data">A first look at real data</a>
+  <ul class="collapse">
+  <li><a href="#selecting-a-column" id="toc-selecting-a-column" class="nav-link" data-scroll-target="#selecting-a-column">Selecting a column</a></li>
+  <li><a href="#counting-categories" id="toc-counting-categories" class="nav-link" data-scroll-target="#counting-categories">Counting categories</a></li>
+  <li><a href="#summarizing-a-numeric-column" id="toc-summarizing-a-numeric-column" class="nav-link" data-scroll-target="#summarizing-a-numeric-column">Summarizing a numeric column</a></li>
+  <li><a href="#visualizing-a-distribution" id="toc-visualizing-a-distribution" class="nav-link" data-scroll-target="#visualizing-a-distribution">Visualizing a distribution</a></li>
+  <li><a href="#filtering-rows" id="toc-filtering-rows" class="nav-link" data-scroll-target="#filtering-rows">Filtering rows</a></li>
+  </ul></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">Key takeaways</a></li>
+  <li><a href="#study-guide" id="toc-study-guide" class="nav-link" data-scroll-target="#study-guide">Study guide</a>
+  <ul class="collapse">
+  <li><a href="#key-ideas" id="toc-key-ideas" class="nav-link" data-scroll-target="#key-ideas">Key ideas</a></li>
+  <li><a href="#computational-tools" id="toc-computational-tools" class="nav-link" data-scroll-target="#computational-tools">Computational tools</a></li>
+  <li><a href="#for-the-quiz" id="toc-for-the-quiz" class="nav-link" data-scroll-target="#for-the-quiz">For the quiz</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lec01-intro.html">Act 1: Build Models</a></li><li class="breadcrumb-item"><a href="./lec01-intro.html"><span class="chapter-title">Introduction to Applied Statistics</span></a></li></ol></nav>
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-title">Introduction to Applied Statistics</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="notebook-links" style="margin-bottom: 1em; padding: 0.5em 1em; background: #f8f9fa; border-radius: 6px; font-size: 0.9em;"><a href="https://colab.research.google.com/github/stanford-mse-125/book/blob/notebooks/lec01-intro.ipynb" target="_blank" aria-label="Open in Colab"><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="117" height="20" style="vertical-align: middle;"><lineargradient id="cb-b" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"></stop><stop offset="1" stop-opacity=".1"></stop></lineargradient><clippath id="cb-a"><rect width="117" height="20" rx="3" fill="#fff"></rect></clippath><g clip-path="url(#cb-a)"><path fill="#555" d="M0 0h30v20H0z"></path><path fill="#007ec6" d="M30 0h87v20H30z"></path><path fill="url(#cb-b)" d="M0 0h117v20H0z"></path></g><g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="110"><svg x="4px" y="0px" width="22px" height="20px" viewbox="-2 0 28 24" style="background-color: #fff;border-radius: 1px;"><path style="fill:#e8710a;" d="M1.977,16.77c-2.667-2.277-2.605-7.079,0-9.357C2.919,8.057,3.522,9.075,4.49,9.691c-1.152,1.6-1.146,3.201-0.004,4.803C3.522,15.111,2.918,16.126,1.977,16.77z"></path><path style="fill:#f9ab00;" d="M12.257,17.114c-1.767-1.633-2.485-3.658-2.118-6.02c0.451-2.91,2.139-4.893,4.946-5.678c2.565-0.718,4.964-0.217,6.878,1.819c-0.884,0.743-1.707,1.547-2.434,2.446C18.488,8.827,17.319,8.435,16,8.856c-2.404,0.767-3.046,3.241-1.494,5.644c-0.241,0.275-0.493,0.541-0.721,0.826C13.295,15.939,12.511,16.3,12.257,17.114z"></path><path style="fill:#e8710a;" d="M19.529,9.682c0.727-0.899,1.55-1.703,2.434-2.446c2.703,2.783,2.701,7.031-0.005,9.764c-2.648,2.674-6.936,2.725-9.701,0.115c0.254-0.814,1.038-1.175,1.528-1.788c0.228-0.285,0.48-0.552,0.721-0.826c1.053,0.916,2.254,1.268,3.6,0.83C20.502,14.551,21.151,11.927,19.529,9.682z"></path><path style="fill:#f9ab00;" d="M4.49,9.691C3.522,9.075,2.919,8.057,1.977,7.413c2.209-2.398,5.721-2.942,8.476-1.355c0.555,0.32,0.719,0.606,0.285,1.128c-0.157,0.188-0.258,0.422-0.391,0.631c-0.299,0.47-0.509,1.067-0.929,1.371C8.933,9.539,8.523,8.847,8.021,8.746C6.673,8.475,5.509,8.787,4.49,9.691z"></path><path style="fill:#f9ab00;" d="M1.977,16.77c0.941-0.644,1.545-1.659,2.509-2.277c1.373,1.152,2.85,1.433,4.45,0.499c0.332-0.194,0.503-0.088,0.673,0.19c0.386,0.635,0.753,1.285,1.181,1.89c0.34,0.48,0.222,0.715-0.253,1.006C7.84,19.73,4.205,19.188,1.977,16.77z"></path></svg><text x="245" y="140" transform="scale(.1)" textlength="30"> </text><text x="725" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textlength="770">Open in Colab</text><text x="725" y="140" transform="scale(.1)" textlength="770">Open in Colab</text></g></svg></a>&nbsp;&nbsp;<a href="notebooks/lec01-intro.ipynb" download="" style="vertical-align: middle;">Download notebook (.ipynb)</a></div>
+<section id="consequential-decisions-with-data" class="level2">
+<h2 class="anchored" data-anchor-id="consequential-decisions-with-data">Consequential decisions with data</h2>
+<p>A hospital gets fined $500K for “too many” readmissions — but does it actually have a quality problem, or does it just serve sicker patients? A home-pricing algorithm overpays on thousands of houses — why? A pharmaceutical company must decide whether a $2 billion drug actually works.</p>
+<p>These are the kind of questions that drive this course. Each one involves real data, a model that could be wrong, and a decision with a major impact.</p>
+<p>Here are ten examples we’ll return to throughout the quarter:</p>
+<table class="table-striped table-hover caption-top table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 35%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Question</th>
+<th>Data</th>
+<th>Decision</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Hospital readmission penalties</td>
+<td>CMS readmission rates by hospital</td>
+<td>Which hospitals should be fined?</td>
+</tr>
+<tr class="even">
+<td>NBA shot selection</td>
+<td>NBA shot charts (location, outcome)</td>
+<td>Are mid-range twos a bad shot?</td>
+</tr>
+<tr class="odd">
+<td>Wealthfront tax-loss harvesting</td>
+<td>Portfolio returns, covariance matrices</td>
+<td>Which lots to sell today to save on taxes?</td>
+</tr>
+<tr class="even">
+<td>WFP food allocation in Yemen</td>
+<td>Hunger indicators from surveys and satellites</td>
+<td>How to feed 2M more people at the same cost?</td>
+</tr>
+<tr class="odd">
+<td>NextEra solar farm siting</td>
+<td>30 years of hourly solar irradiance (NREL)</td>
+<td>Which parcels maximize energy per dollar?</td>
+</tr>
+<tr class="even">
+<td>Pfizer vaccine efficacy</td>
+<td>Randomized trial: 8 vs.&nbsp;162 cases in 43K patients</td>
+<td>Enough evidence for emergency authorization?</td>
+</tr>
+<tr class="odd">
+<td>NC gerrymandering</td>
+<td>Precinct-level votes + 24K simulated district maps</td>
+<td>Was the 10–3 seat split geographic luck or manipulation?</td>
+</tr>
+<tr class="even">
+<td>Zillow’s iBuying loss</td>
+<td>Home prices, Zestimate predictions</td>
+<td>Why did the algorithm overpay on most homes?</td>
+</tr>
+<tr class="odd">
+<td>COMPAS bail scores</td>
+<td>Risk scores and recidivism outcomes by race</td>
+<td>Why is the false positive rate 45% for Black defendants vs.&nbsp;23% for white?</td>
+</tr>
+<tr class="even">
+<td>Netflix recommendations</td>
+<td>100M ratings from 480K users on 17K movies</td>
+<td>Which movies to recommend to which users?</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How do you make these decisions with data?</strong> We’ll spend the quarter building the tools to answer these questions.</p>
+<blockquote class="blockquote">
+<p><em>“In God we trust; all others must bring data.”</em> — W. Edwards Deming</p>
+</blockquote>
+<div id="aaa7cf77" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">'whitegrid'</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'figure.figsize'</span>] <span class="op">=</span> (<span class="dv">8</span>, <span class="dv">5</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'font.size'</span>] <span class="op">=</span> <span class="dv">12</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>DATA_DIR <span class="op">=</span> <span class="st">'data'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="what-makes-a-decision-consequential" class="level2">
+<h2 class="anchored" data-anchor-id="what-makes-a-decision-consequential">What makes a decision consequential?</h2>
+<p>A decision is <strong>consequential</strong> when getting it wrong has serious impact — and someone has to live with the outcome. The examples above aren’t just interesting data problems; they’re decisions where the cost of being wrong is high.</p>
+<p><strong>Financial impact.</strong> Zillow’s iBuying algorithm overpaid on nearly every home it purchased in Q3 2021, leading to an $881M write-down and the shutdown of an entire business unit. On the other side, Wealthfront manages $50B in assets — a bug in its tax-loss harvesting algorithm costs real clients real money.</p>
+<p><strong>Human impact.</strong> CMS hospital readmission penalties can cost a hospital $500K–$1M per year, directly affecting the resources available for patient care. COMPAS bail scores determine who walks free and who waits in jail — and as we’ll see in Act 3, the algorithm’s errors fall unevenly across racial groups in a way that no single fix can resolve. The Pfizer vaccine trial — 8 cases vs.&nbsp;162 in 43,000 patients — determined whether millions of people got vaccinated.</p>
+<p><strong>Irreversibility.</strong> Some decisions can’t be undone. A prison sentence served on a false positive can’t be returned. A candidate elected based on gerrymandered districts can’t be un-elected. Surgical decisions, infrastructure investments, closing a business unit — these are one-way doors.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>The fairness impossibility
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The COMPAS controversy reveals a deep mathematical constraint, not just a software bug. ProPublica found that Black defendants who did <em>not</em> reoffend were nearly twice as likely to be flagged high-risk (false positive rate: 45% vs.&nbsp;23%). Northpointe, the algorithm’s maker, countered that among defendants <em>scored</em> as high-risk, the actual recidivism rate was similar across races (~60%). Both were correct — but they measured fairness differently.</p>
+<p>It turns out that when two groups have different base rates of reoffending, it is <em>mathematically impossible</em> to equalize both false positive rates and predictive values at the same time (Chouldechova 2017; Kleinberg, Mullainathan, and Raghavan 2016). This constraint isn’t a bug to fix — it’s a tradeoff to navigate. Which fairness criterion to prioritize is a values question, not a statistical one. We’ll formalize this in Act 3.</p>
+</div>
+</div>
+<p><strong>Scale.</strong> The World Food Programme’s reallocation model affects 2 million people simultaneously. Netflix’s recommendation algorithm shapes what 200 million users watch. When a decision affects many people at once, even small errors can be consequential.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Think about it
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Look back at the ten questions in the table above. Pick three from different domains. Which of these four dimensions (financial, human, irreversible, scale) applies to each? Most consequential decisions hit more than one.</p>
+</div>
+</div>
+<p>MS&amp;E graduates will make exactly these kinds of decisions. This course is designed to teach you the tools — building models, quantifying uncertainty, reasoning about causation — to make these decisions with data. By the end of this course, you will know when <em>not</em> to trust a model’s output — when the data is insufficient, when the assumptions are violated, when the metric is misleading, and when a confident prediction should be met with skepticism. Chapter 17 distills these instincts into a 15-item checklist — a portable tool you can apply to any analysis, in any domain, for the rest of your career. The rest you can learn online.</p>
+</section>
+<section id="what-is-applied-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-applied-statistics">What is applied statistics?</h2>
+<p><strong>Applied statistics</strong> is the science of making decisions under uncertainty using data. You’ll learn to work at the intersection of three disciplines:</p>
+<ul>
+<li><strong>Probability</strong> (from MS&amp;E 120) — the mathematics of uncertainty</li>
+<li><strong>Computing</strong> — the tools for wrangling real datasets</li>
+<li><strong>Domain knowledge</strong> — the context that turns numbers into insight</li>
+</ul>
+<p>As John Tukey put it: <em>“The best thing about being a statistician is that you get to play in everyone’s backyard.”</em> The same tools you’ll learn here apply to healthcare, housing, sports, and drug development.</p>
+</section>
+<section id="four-ways-to-reason-with-data" class="level2">
+<h2 class="anchored" data-anchor-id="four-ways-to-reason-with-data">Four ways to reason with data</h2>
+<p>The same dataset can answer very different questions depending on how you reason about it. Consider the hospital readmissions data. Here are four questions — each requiring a different mode of thinking:</p>
+<table class="table-striped table-hover caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 40%">
+<col style="width: 45%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Mode</th>
+<th>Question</th>
+<th>Decision</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Summary</strong></td>
+<td>What does the ERR distribution look like across U.S. hospitals?</td>
+<td>Which hospitals are outliers?</td>
+</tr>
+<tr class="even">
+<td><strong>Prediction</strong></td>
+<td>Given a hospital’s characteristics, what ERR should we expect?</td>
+<td>Should CMS flag this hospital for review?</td>
+</tr>
+<tr class="odd">
+<td><strong>Inference</strong></td>
+<td>Is this hospital’s ERR of 1.05 statistically different from 1.0?</td>
+<td>Should the hospital be fined?</td>
+</tr>
+<tr class="even">
+<td><strong>Causation</strong></td>
+<td>Do the fines actually reduce readmissions?</td>
+<td>Should CMS continue the penalty program?</td>
+</tr>
+</tbody>
+</table>
+<p>These four modes — <strong>summary, prediction, inference, and causation</strong> — form the backbone of applied statistics. Each one requires different tools and answers a fundamentally different kind of question.</p>
+<p><strong>Summary</strong> asks: <em>what happened?</em> You compute statistics, make plots, and describe the data as it is. Later in this chapter, we’ll do exactly that — loading hospital data, counting conditions with <code>value_counts()</code>, and plotting the ERR distribution. Summary is the starting point, but it’s not the end. A histogram tells you what the data looks like; it doesn’t tell you what to do about it.</p>
+<p><strong>Prediction</strong> asks: <em>what will happen next?</em> Given a new hospital’s patient mix, neighborhood, and staffing levels, what ERR should we expect? Prediction doesn’t require understanding <em>why</em> — a model can predict accurately without explaining the mechanism. In Act 1, we’ll build prediction models using regression, feature engineering, and decision trees.</p>
+<p><strong>Inference</strong> asks: <em>what can we conclude about the population?</em> If a hospital’s ERR is 1.05, is that a real signal or just noise from a small sample? Inference quantifies uncertainty — it tells you how confident to be. Consider the Pfizer vaccine trial: the prediction is that the vaccine works (8 cases vs.&nbsp;162 in 43,000 patients). But should we authorize it for hundreds of millions of people based on one trial? Inference answers that question — by telling us how likely the observed result would be if the vaccine had no effect. In Act 2, we’ll build the tools for inference: confidence intervals, hypothesis tests, and p-values.</p>
+<p><strong>Causation</strong> asks: <em>what would happen if we intervened?</em> Does fining hospitals actually reduce readmissions — or do penalized hospitals just learn to game the metrics? Causal questions are the hardest because correlation doesn’t imply causation. Observing that fined hospitals improve doesn’t prove the fine caused the improvement — maybe those hospitals were already investing in quality. The comparison may be <strong>confounded</strong> by other changes happening at the same time. We’ll define and study confounding starting in Chapter 2. In Act 3, we’ll develop frameworks for causal reasoning.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Think about it
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pick one of the ten questions from the opening table. Which of the four modes — summary, prediction, inference, or causation — does it primarily involve? Most involve more than one.</p>
+</div>
+</div>
+<p>Each mode builds on the last. You can’t predict without first summarizing. You can’t infer without a prediction model. And you can’t reason about causation without understanding what inference can and can’t tell you. The three acts of this course follow this progression.</p>
+</section>
+<section id="the-three-acts-of-this-course" class="level2">
+<h2 class="anchored" data-anchor-id="the-three-acts-of-this-course">The three acts of this course</h2>
+<p>The course follows a three-act structure. Each act builds on the last:</p>
+<p><strong>Act 1: Build Models</strong> (Chapters 1–7) — Explore data, clean it, and build predictive models. We’ll use regression, feature engineering, and decision trees on real datasets.</p>
+<p><strong>Act 2: Trust Models</strong> (Chapters 8–12) — Sampling, hypothesis testing, and regression inference. We’ll ask: how precise are our estimates? Is the drug effect real? Which coefficients matter?</p>
+<p><strong>Act 3: See Further</strong> (Chapters 13–19) — Classification, PCA, clustering, time series, tree-based methods, and causal inference. We’ll move from “what happened” to “why.”</p>
+<p>Acts 1–3 correspond to the four modes of reasoning: Act 1 covers summary and prediction, Act 2 covers inference, and Act 3 adds causation.</p>
+<p>We’ll see the ten questions from the opening recur throughout the course:</p>
+<table class="table-striped table-hover caption-top table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 40%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Question</th>
+<th>Topics</th>
+<th>Act</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Hospital readmission penalties</td>
+<td>EDA, hypothesis testing</td>
+<td>I → II</td>
+</tr>
+<tr class="even">
+<td>NBA shot selection</td>
+<td>EDA, conditional expected value</td>
+<td>I</td>
+</tr>
+<tr class="odd">
+<td>Wealthfront tax-loss harvesting</td>
+<td>Optimization, regression</td>
+<td>I</td>
+</tr>
+<tr class="even">
+<td>WFP food allocation</td>
+<td>Linear algebra, optimization</td>
+<td>I</td>
+</tr>
+<tr class="odd">
+<td>NextEra solar farm siting</td>
+<td>Feature engineering, regression</td>
+<td>I</td>
+</tr>
+<tr class="even">
+<td>Pfizer vaccine efficacy</td>
+<td>Hypothesis testing, multiple testing</td>
+<td>II</td>
+</tr>
+<tr class="odd">
+<td>NC gerrymandering</td>
+<td>Permutation tests, simulation</td>
+<td>II</td>
+</tr>
+<tr class="even">
+<td>Zillow’s iBuying algorithm</td>
+<td>Regression, prediction intervals, backtesting</td>
+<td>I → II</td>
+</tr>
+<tr class="odd">
+<td>COMPAS bail scores</td>
+<td>Classification, fairness</td>
+<td>III</td>
+</tr>
+<tr class="even">
+<td>Netflix recommendations</td>
+<td>PCA, SVD, matrix completion</td>
+<td>III</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="a-first-look-at-real-data" class="level2">
+<h2 class="anchored" data-anchor-id="a-first-look-at-real-data">A first look at real data</h2>
+<p>Let’s put these ideas to work on a real dataset. The Centers for Medicare &amp; Medicaid Services (CMS) tracks how often patients are readmitted to hospitals within 30 days of discharge. Hospitals with “too many” readmissions get fined.</p>
+<p>We load the data with <code>pd.read_csv()</code> and inspect the first few rows with <code>.head()</code>:</p>
+<div id="cc607af6" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load hospital readmissions data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>readmissions <span class="op">=</span> pd.read_csv(<span class="ss">f'</span><span class="sc">{</span>DATA_DIR<span class="sc">}</span><span class="ss">/hospital-readmissions/hrrp_full.csv'</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Shape: </span><span class="sc">{</span>readmissions<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">:,}</span><span class="ss"> rows × </span><span class="sc">{</span>readmissions<span class="sc">.</span>shape[<span class="dv">1</span>]<span class="sc">}</span><span class="ss"> columns"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>readmissions.head(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Shape: 18,330 rows × 12 columns</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Facility Name</th>
+<th data-quarto-table-cell-role="th">Facility ID</th>
+<th data-quarto-table-cell-role="th">State</th>
+<th data-quarto-table-cell-role="th">Measure Name</th>
+<th data-quarto-table-cell-role="th">Number of Discharges</th>
+<th data-quarto-table-cell-role="th">Footnote</th>
+<th data-quarto-table-cell-role="th">Excess Readmission Ratio</th>
+<th data-quarto-table-cell-role="th">Predicted Readmission Rate</th>
+<th data-quarto-table-cell-role="th">Expected Readmission Rate</th>
+<th data-quarto-table-cell-role="th">Number of Readmissions</th>
+<th data-quarto-table-cell-role="th">Start Date</th>
+<th data-quarto-table-cell-role="th">End Date</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>SOUTHEAST HEALTH MEDICAL CENTER</td>
+<td>10001</td>
+<td>AL</td>
+<td>READM-30-HIP-KNEE-HRRP</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0.9875</td>
+<td>4.5734</td>
+<td>4.6311</td>
+<td>Too Few to Report</td>
+<td>07/01/2021</td>
+<td>06/30/2024</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>SOUTHEAST HEALTH MEDICAL CENTER</td>
+<td>10001</td>
+<td>AL</td>
+<td>READM-30-CABG-HRRP</td>
+<td>137.0</td>
+<td>NaN</td>
+<td>0.9531</td>
+<td>10.3960</td>
+<td>10.9078</td>
+<td>13</td>
+<td>07/01/2021</td>
+<td>06/30/2024</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>SOUTHEAST HEALTH MEDICAL CENTER</td>
+<td>10001</td>
+<td>AL</td>
+<td>READM-30-AMI-HRRP</td>
+<td>273.0</td>
+<td>NaN</td>
+<td>0.9370</td>
+<td>13.2998</td>
+<td>14.1948</td>
+<td>33</td>
+<td>07/01/2021</td>
+<td>06/30/2024</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>SOUTHEAST HEALTH MEDICAL CENTER</td>
+<td>10001</td>
+<td>AL</td>
+<td>READM-30-COPD-HRRP</td>
+<td>122.0</td>
+<td>NaN</td>
+<td>0.9823</td>
+<td>16.6384</td>
+<td>16.9389</td>
+<td>19</td>
+<td>07/01/2021</td>
+<td>06/30/2024</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>SOUTHEAST HEALTH MEDICAL CENTER</td>
+<td>10001</td>
+<td>AL</td>
+<td>READM-30-PN-HRRP</td>
+<td>507.0</td>
+<td>NaN</td>
+<td>0.9871</td>
+<td>15.7529</td>
+<td>15.9591</td>
+<td>79</td>
+<td>07/01/2021</td>
+<td>06/30/2024</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>SOUTHEAST HEALTH MEDICAL CENTER</td>
+<td>10001</td>
+<td>AL</td>
+<td>READM-30-HF-HRRP</td>
+<td>653.0</td>
+<td>NaN</td>
+<td>1.0233</td>
+<td>20.5695</td>
+<td>20.1010</td>
+<td>136</td>
+<td>07/01/2021</td>
+<td>06/30/2024</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>MARSHALL MEDICAL CENTERS</td>
+<td>10005</td>
+<td>AL</td>
+<td>READM-30-CABG-HRRP</td>
+<td>NaN</td>
+<td>5.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>07/01/2021</td>
+<td>06/30/2024</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>MARSHALL MEDICAL CENTERS</td>
+<td>10005</td>
+<td>AL</td>
+<td>READM-30-AMI-HRRP</td>
+<td>NaN</td>
+<td>1.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>07/01/2021</td>
+<td>06/30/2024</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>MARSHALL MEDICAL CENTERS</td>
+<td>10005</td>
+<td>AL</td>
+<td>READM-30-COPD-HRRP</td>
+<td>132.0</td>
+<td>NaN</td>
+<td>0.9308</td>
+<td>16.8541</td>
+<td>18.1080</td>
+<td>17</td>
+<td>07/01/2021</td>
+<td>06/30/2024</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>MARSHALL MEDICAL CENTERS</td>
+<td>10005</td>
+<td>AL</td>
+<td>READM-30-HF-HRRP</td>
+<td>164.0</td>
+<td>NaN</td>
+<td>1.0087</td>
+<td>20.9512</td>
+<td>20.7700</td>
+<td>35</td>
+<td>07/01/2021</td>
+<td>06/30/2024</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Each row is one hospital-condition pair. The table above is a <strong>DataFrame</strong> — the fundamental data structure in data science. Nearly every dataset you’ll encounter lives in a DataFrame.</p>
+<section id="selecting-a-column" class="level3">
+<h3 class="anchored" data-anchor-id="selecting-a-column">Selecting a column</h3>
+<p>To grab a single column from a DataFrame, use bracket notation:</p>
+<div id="d323e3dd" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select one column — this returns a Series</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>readmissions[<span class="st">'Measure Name'</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>0        READM-30-HIP-KNEE-HRRP
+1            READM-30-CABG-HRRP
+2             READM-30-AMI-HRRP
+3            READM-30-COPD-HRRP
+4              READM-30-PN-HRRP
+                  ...          
+18325    READM-30-HIP-KNEE-HRRP
+18326          READM-30-HF-HRRP
+18327        READM-30-COPD-HRRP
+18328        READM-30-CABG-HRRP
+18329         READM-30-AMI-HRRP
+Name: Measure Name, Length: 18330, dtype: str</code></pre>
+</div>
+</div>
+<p>The expression <code>readmissions['Measure Name']</code> pulls out one column as a <strong>Series</strong> — a labeled array of values. This move — selecting a column from a DataFrame — is one you’ll use constantly.</p>
+</section>
+<section id="counting-categories" class="level3">
+<h3 class="anchored" data-anchor-id="counting-categories">Counting categories</h3>
+<p>What conditions are tracked?</p>
+<div id="39b0a940" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>readmissions[<span class="st">'Measure Name'</span>].value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>Measure Name
+READM-30-HIP-KNEE-HRRP    3055
+READM-30-CABG-HRRP        3055
+READM-30-AMI-HRRP         3055
+READM-30-COPD-HRRP        3055
+READM-30-PN-HRRP          3055
+READM-30-HF-HRRP          3055
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+<p><code>value_counts()</code> tallies each unique value. Six medical conditions, each measured across thousands of hospitals.</p>
+</section>
+<section id="summarizing-a-numeric-column" class="level3">
+<h3 class="anchored" data-anchor-id="summarizing-a-numeric-column">Summarizing a numeric column</h3>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Definition: Excess readmission ratio (ERR)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <strong>Excess Readmission Ratio (ERR)</strong> compares a hospital’s predicted readmissions to its expected number, after adjusting for patient risk. A value above 1.0 means more readmissions than expected.</p>
+</div>
+</div>
+<div id="ea705cdc" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>readmissions[<span class="st">'Excess Readmission Ratio'</span>].describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>count    11720.000000
+mean         1.001777
+std          0.082050
+min          0.469800
+25%          0.958200
+50%          0.997300
+75%          1.042300
+max          1.629700
+Name: Excess Readmission Ratio, dtype: float64</code></pre>
+</div>
+</div>
+<p>The mean is close to 1.0 — most hospitals are near the expected rate. But the spread tells the real story: some hospitals are well above or below.</p>
+</section>
+<section id="visualizing-a-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="visualizing-a-distribution">Visualizing a distribution</h3>
+<p>Before plotting, note that some ERR values are missing. The <code>.dropna()</code> call below removes them — always check how many are absent before dropping:</p>
+<div id="c7de2430" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Missing ERR values: </span><span class="sc">{</span>readmissions[<span class="st">'Excess Readmission Ratio'</span>]<span class="sc">.</span>isna()<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">:,}</span><span class="ss"> "</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>      <span class="ss">f"out of </span><span class="sc">{</span><span class="bu">len</span>(readmissions)<span class="sc">:,}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Missing ERR values: 6,610 out of 18,330</code></pre>
+</div>
+</div>
+<p>Now we use <code>sns.histplot()</code> to visualize the distribution:</p>
+<div id="474bf49a" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>sns.histplot(readmissions[<span class="st">'Excess Readmission Ratio'</span>].dropna(), bins<span class="op">=</span><span class="dv">50</span>, ax<span class="op">=</span>ax,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>             edgecolor<span class="op">=</span><span class="st">'white'</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>ax.axvline(x<span class="op">=</span><span class="fl">1.0</span>, color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'Expected = 1.0'</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Excess readmission ratio'</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Count'</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Hospital readmission performance across the U.S.'</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec01-intro_files/figure-html/cell-8-output-1.png" width="752" height="463" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The distribution is centered near 1.0, with real spread. Hospitals to the right of the red line have more readmissions than expected.</p>
+</section>
+<section id="filtering-rows" class="level3">
+<h3 class="anchored" data-anchor-id="filtering-rows">Filtering rows</h3>
+<p>What if we want to focus on just one condition? Use boolean filtering:</p>
+<div id="20662287" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter to heart failure only</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>heart_failure <span class="op">=</span> readmissions[readmissions[<span class="st">'Measure Name'</span>] <span class="op">==</span> <span class="st">'READM-30-HF-HRRP'</span>]</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Heart failure rows: </span><span class="sc">{</span>heart_failure<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">:,}</span><span class="ss">"</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>heart_failure[[<span class="st">'Facility Name'</span>, <span class="st">'State'</span>, <span class="st">'Excess Readmission Ratio'</span>]].head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Heart failure rows: 3,055</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Facility Name</th>
+<th data-quarto-table-cell-role="th">State</th>
+<th data-quarto-table-cell-role="th">Excess Readmission Ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">5</th>
+<td>SOUTHEAST HEALTH MEDICAL CENTER</td>
+<td>AL</td>
+<td>1.0233</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>MARSHALL MEDICAL CENTERS</td>
+<td>AL</td>
+<td>1.0087</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">15</th>
+<td>NORTH ALABAMA MEDICAL CENTER</td>
+<td>AL</td>
+<td>0.9925</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">20</th>
+<td>MIZELL MEMORIAL HOSPITAL</td>
+<td>AL</td>
+<td>1.0620</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">26</th>
+<td>CRENSHAW COMMUNITY HOSPITAL</td>
+<td>AL</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>The expression inside the brackets — <code>readmissions['Measure Name'] == 'READM-30-HF-HRRP'</code> — produces a True/False value for each row. Only the True rows are kept. Boolean filtering — selecting rows that satisfy a condition — is a fundamental pandas operation.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Think about it
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you ran a hospital and your heart failure ERR was 1.05, would you worry? How would you decide if that number reflects a real quality problem or just random variation? That’s a statistics question — and one we’ll answer in Act 2.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="key-takeaways" class="level2">
+<h2 class="anchored" data-anchor-id="key-takeaways">Key takeaways</h2>
+<ul>
+<li><strong>Applied statistics is about decisions under uncertainty</strong>, not formulas in a vacuum.</li>
+<li>The same dataset supports four different modes of reasoning: <strong>summary</strong> (what happened?), <strong>prediction</strong> (what will happen?), <strong>inference</strong> (what can we conclude?), and <strong>causation</strong> (what would happen if we intervened?).</li>
+<li>Each mode requires different tools and answers a different kind of question. The three acts of this course build them in sequence.</li>
+<li>Any analysis — from an AI, a colleague, or your own first pass — deserves skepticism. Your job is to verify.</li>
+<li>Every dataset has a story. Learning to read that story — and question it — is the core skill of a statistician.</li>
+</ul>
+</section>
+<section id="study-guide" class="level2">
+<h2 class="anchored" data-anchor-id="study-guide">Study guide</h2>
+<section id="key-ideas" class="level3">
+<h3 class="anchored" data-anchor-id="key-ideas">Key ideas</h3>
+<ul>
+<li><strong>Applied statistics</strong> is the science of making decisions under uncertainty using data.</li>
+<li>Four modes of reasoning with data: <strong>summary</strong> (describe what happened), <strong>prediction</strong> (forecast what will happen), <strong>inference</strong> (quantify uncertainty about a conclusion), <strong>causation</strong> (determine what would happen under an intervention).</li>
+<li>These four modes map onto the course: summary and prediction in Act 1, inference in Act 2, causation in Act 3.</li>
+<li>The <strong>Excess Readmission Ratio (ERR)</strong> compares a hospital’s readmissions to what’s expected given its patient mix. Above 1.0 = more readmissions than expected.</li>
+<li>Real data is <strong>noisy</strong> (errors, corruption), <strong>missing</strong> (not recorded, suppressed), and <strong>heterogeneous</strong> (numbers, categories, text, networks).</li>
+<li>A single number without an uncertainty estimate is dangerous — Zillow’s $881M loss illustrates why prediction intervals matter.</li>
+<li>Any quick analysis — from an AI, a script, or a first pass — can produce plausible-looking results that miss critical problems in the data.</li>
+</ul>
+</section>
+<section id="computational-tools" class="level3">
+<h3 class="anchored" data-anchor-id="computational-tools">Computational tools</h3>
+<ul>
+<li><code>pd.read_csv()</code> — load a CSV file into a DataFrame</li>
+<li><code>df['column_name']</code> — select a single column (returns a Series)</li>
+<li><code>.head()</code> — peek at the first few rows</li>
+<li><code>.describe()</code> — summary statistics (mean, std, min, max, quartiles)</li>
+<li><code>.value_counts()</code> — count unique values in a column</li>
+<li><code>sns.histplot()</code> — plot a histogram</li>
+<li><code>df[df['col'] == value]</code> — filter rows by a condition (boolean indexing)</li>
+</ul>
+</section>
+<section id="for-the-quiz" class="level3">
+<h3 class="anchored" data-anchor-id="for-the-quiz">For the quiz</h3>
+<ul>
+<li>No quiz this week, but expect one every Wednesday starting next week. The quizzes are closed-book, closed-notes, and designed to test your understanding of the key ideas and tools from the lectures. They often involve interpreting code snippets, analyzing data outputs, or applying concepts to new scenarios. The best way to prepare is to review the lecture notes, understand the examples we covered, and practice with the datasets on your own.</li>
+</ul>
+
+
+<!-- -->
+
+<div class="feedback-link" style="margin-top: 2em; padding: 0.75em 1em; background: #f0f7f5; border-left: 4px solid #5ba899; border-radius: 6px; font-size: 0.9em;">How was this chapter? Help us improve these notes. <a href="https://docs.google.com/forms/d/e/1FAIpQLScokCu2Rsz7zZw7XTOzsE_OBODr6iHjB1ErOw0zizorHD0zXg/viewform?usp=pp_url&amp;entry.1875336381=Course+Notes&amp;entry.1608396530=1" target="_blank" style="color: #3d7a6e; font-weight: 500;">Share feedback</a></div>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script>
+// Fix for Quarto 1.8 code-tools "Show All Code" / "Hide All Code" bug.
+// The built-in JS uses ".cell > details > .sourceCode" but Quarto 1.8
+// wraps code in ".code-copy-outer-scaffold", breaking the direct child selector.
+document.addEventListener("DOMContentLoaded", function() {
+  function toggleAllCode(show) {
+    document.querySelectorAll(".cell > details.code-fold").forEach(function(details) {
+      details.open = show;
+    });
+  }
+  var showBtn = document.getElementById("quarto-show-all-code");
+  var hideBtn = document.getElementById("quarto-hide-all-code");
+  if (showBtn) showBtn.addEventListener("click", function() { toggleAllCode(true); });
+  if (hideBtn) hideBtn.addEventListener("click", function() { toggleAllCode(false); });
+});
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="MS&amp;E 125: Applied Statistics">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">MS&amp;E 125: Applied Statistics</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./lec02-eda.html" class="pagination-link" aria-label="Exploratory Data Analysis &amp; Visualization">
+        <span class="nav-page-text"><span class="chapter-title">Exploratory Data Analysis &amp; Visualization</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Introduction to Applied Statistics"</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">  enabled: true</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="an">jupyter:</span><span class="co"> python3</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="fu">## Consequential decisions with data</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>A hospital gets fined \$500K for "too many" readmissions — but does it actually have a quality problem, or does it just serve sicker patients? A home-pricing algorithm overpays on thousands of houses — why? A pharmaceutical company must decide whether a \$2 billion drug actually works.</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>These are the kind of questions that drive this course. </span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>Each one involves real data, a model that could be wrong, </span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>and a decision with a major impact.</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>Here are ten examples we'll return to throughout the quarter:</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Question <span class="pp">|</span> Data <span class="pp">|</span> Decision <span class="pp">|</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="pp">|----------|------|----------|</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Hospital readmission penalties <span class="pp">|</span> CMS readmission rates by hospital <span class="pp">|</span> Which hospitals should be fined? <span class="pp">|</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> NBA shot selection <span class="pp">|</span> NBA shot charts (location, outcome) <span class="pp">|</span> Are mid-range twos a bad shot? <span class="pp">|</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Wealthfront tax-loss harvesting <span class="pp">|</span> Portfolio returns, covariance matrices <span class="pp">|</span> Which lots to sell today to save on taxes? <span class="pp">|</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> WFP food allocation in Yemen <span class="pp">|</span> Hunger indicators from surveys and satellites <span class="pp">|</span> How to feed 2M more people at the same cost? <span class="pp">|</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> NextEra solar farm siting <span class="pp">|</span> 30 years of hourly solar irradiance (NREL) <span class="pp">|</span> Which parcels maximize energy per dollar? <span class="pp">|</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Pfizer vaccine efficacy <span class="pp">|</span> Randomized trial: 8 vs. 162 cases in 43K patients <span class="pp">|</span> Enough evidence for emergency authorization? <span class="pp">|</span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> NC gerrymandering <span class="pp">|</span> Precinct-level votes + 24K simulated district maps <span class="pp">|</span> Was the 10–3 seat split geographic luck or manipulation? <span class="pp">|</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Zillow's iBuying loss <span class="pp">|</span> Home prices, Zestimate predictions <span class="pp">|</span> Why did the algorithm overpay on most homes? <span class="pp">|</span></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> COMPAS bail scores <span class="pp">|</span> Risk scores and recidivism outcomes by race <span class="pp">|</span> Why is the false positive rate 45% for Black defendants vs. 23% for white? <span class="pp">|</span></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Netflix recommendations <span class="pp">|</span> 100M ratings from 480K users on 17K movies <span class="pp">|</span> Which movies to recommend to which users? <span class="pp">|</span></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>: {.striped .hover tbl-colwidths="<span class="co">[</span><span class="ot">30,35,35</span><span class="co">]</span>"}</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>**How do you make these decisions with data?**</span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>We'll spend the quarter building the tools to answer these questions. </span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *"In God we trust; all others must bring data."* — W. Edwards Deming</span></span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">'whitegrid'</span>)</span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'figure.figsize'</span>] <span class="op">=</span> (<span class="dv">8</span>, <span class="dv">5</span>)</span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'font.size'</span>] <span class="op">=</span> <span class="dv">12</span></span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a>DATA_DIR <span class="op">=</span> <span class="st">'data'</span></span>
+<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a><span class="fu">## What makes a decision consequential?</span></span>
+<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a>A decision is **consequential** when getting it wrong has serious impact — and someone has to live with the outcome. The examples above aren't just interesting data problems; they're decisions where the cost of being wrong is high.</span>
+<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a>**Financial impact.** Zillow's iBuying algorithm overpaid on nearly every home it purchased in Q3 2021, leading to an \$881M write-down and the shutdown of an entire business unit. On the other side, Wealthfront manages \$50B in assets — a bug in its tax-loss harvesting algorithm costs real clients real money.</span>
+<span id="cb15-60"><a href="#cb15-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-61"><a href="#cb15-61" aria-hidden="true" tabindex="-1"></a>**Human impact.** CMS hospital readmission penalties can cost a hospital \$500K–\$1M per year, directly affecting the resources available for patient care. COMPAS bail scores determine who walks free and who waits in jail — and as we'll see in Act 3, the algorithm's errors fall unevenly across racial groups in a way that no single fix can resolve. The Pfizer vaccine trial — 8 cases vs. 162 in 43,000 patients — determined whether millions of people got vaccinated.</span>
+<span id="cb15-62"><a href="#cb15-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-63"><a href="#cb15-63" aria-hidden="true" tabindex="-1"></a>**Irreversibility.** Some decisions can't be undone. A prison sentence served on a false positive can't be returned. A candidate elected based on gerrymandered districts can't be un-elected. Surgical decisions, infrastructure investments, closing a business unit — these are one-way doors.</span>
+<span id="cb15-64"><a href="#cb15-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-65"><a href="#cb15-65" aria-hidden="true" tabindex="-1"></a>:::{.callout-note}</span>
+<span id="cb15-66"><a href="#cb15-66" aria-hidden="true" tabindex="-1"></a><span class="fu">## The fairness impossibility</span></span>
+<span id="cb15-67"><a href="#cb15-67" aria-hidden="true" tabindex="-1"></a>The COMPAS controversy reveals a deep mathematical constraint, not just a software bug. ProPublica found that Black defendants who did *not* reoffend were nearly twice as likely to be flagged high-risk (false positive rate: 45% vs. 23%). Northpointe, the algorithm's maker, countered that among defendants *scored* as high-risk, the actual recidivism rate was similar across races (~60%). Both were correct — but they measured fairness differently.</span>
+<span id="cb15-68"><a href="#cb15-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-69"><a href="#cb15-69" aria-hidden="true" tabindex="-1"></a>It turns out that when two groups have different base rates of reoffending, it is *mathematically impossible* to equalize both false positive rates and predictive values at the same time (Chouldechova 2017; Kleinberg, Mullainathan, and Raghavan 2016). This constraint isn't a bug to fix — it's a tradeoff to navigate. Which fairness criterion to prioritize is a values question, not a statistical one. We'll formalize this in Act 3.</span>
+<span id="cb15-70"><a href="#cb15-70" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-71"><a href="#cb15-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-72"><a href="#cb15-72" aria-hidden="true" tabindex="-1"></a>**Scale.** The World Food Programme's reallocation model affects 2 million people simultaneously. Netflix's recommendation algorithm shapes what 200 million users watch. When a decision affects many people at once, even small errors can be consequential.</span>
+<span id="cb15-73"><a href="#cb15-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-74"><a href="#cb15-74" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip}</span>
+<span id="cb15-75"><a href="#cb15-75" aria-hidden="true" tabindex="-1"></a><span class="fu">## Think about it</span></span>
+<span id="cb15-76"><a href="#cb15-76" aria-hidden="true" tabindex="-1"></a>Look back at the ten questions in the table above. Pick three from different domains. Which of these four dimensions (financial, human, irreversible, scale) applies to each? Most consequential decisions hit more than one.</span>
+<span id="cb15-77"><a href="#cb15-77" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-78"><a href="#cb15-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-79"><a href="#cb15-79" aria-hidden="true" tabindex="-1"></a>MS&amp;E graduates will make exactly these kinds of decisions. </span>
+<span id="cb15-80"><a href="#cb15-80" aria-hidden="true" tabindex="-1"></a>This course is designed to teach you the tools — building models, quantifying uncertainty, reasoning about causation — to make these decisions with data.</span>
+<span id="cb15-81"><a href="#cb15-81" aria-hidden="true" tabindex="-1"></a>By the end of this course, you will know when *not* to trust a model's output — when the data is insufficient, when the assumptions are violated, when the metric is misleading, and when a confident prediction should be met with skepticism. Chapter 17 distills these instincts into a 15-item checklist — a portable tool you can apply to any analysis, in any domain, for the rest of your career. The rest you can learn online.</span>
+<span id="cb15-82"><a href="#cb15-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-83"><a href="#cb15-83" aria-hidden="true" tabindex="-1"></a><span class="fu">## What is applied statistics?</span></span>
+<span id="cb15-84"><a href="#cb15-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-85"><a href="#cb15-85" aria-hidden="true" tabindex="-1"></a>**Applied statistics** is the science of making decisions under uncertainty using data. You'll learn to work at the intersection of three disciplines:</span>
+<span id="cb15-86"><a href="#cb15-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-87"><a href="#cb15-87" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Probability** (from MS&amp;E 120) — the mathematics of uncertainty</span>
+<span id="cb15-88"><a href="#cb15-88" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Computing** — the tools for wrangling real datasets</span>
+<span id="cb15-89"><a href="#cb15-89" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Domain knowledge** — the context that turns numbers into insight</span>
+<span id="cb15-90"><a href="#cb15-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-91"><a href="#cb15-91" aria-hidden="true" tabindex="-1"></a>As John Tukey put it: *"The best thing about being a statistician is that you get to play in everyone's backyard."* The same tools you'll learn here apply to healthcare, housing, sports, and drug development.</span>
+<span id="cb15-92"><a href="#cb15-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-93"><a href="#cb15-93" aria-hidden="true" tabindex="-1"></a><span class="fu">## Four ways to reason with data</span></span>
+<span id="cb15-94"><a href="#cb15-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-95"><a href="#cb15-95" aria-hidden="true" tabindex="-1"></a>The same dataset can answer very different questions depending on how you reason about it. Consider the hospital readmissions data. Here are four questions — each requiring a different mode of thinking:</span>
+<span id="cb15-96"><a href="#cb15-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-97"><a href="#cb15-97" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Mode <span class="pp">|</span> Question <span class="pp">|</span> Decision <span class="pp">|</span></span>
+<span id="cb15-98"><a href="#cb15-98" aria-hidden="true" tabindex="-1"></a><span class="pp">|------|----------|----------|</span></span>
+<span id="cb15-99"><a href="#cb15-99" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **Summary** <span class="pp">|</span> What does the ERR distribution look like across U.S. hospitals? <span class="pp">|</span> Which hospitals are outliers? <span class="pp">|</span></span>
+<span id="cb15-100"><a href="#cb15-100" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **Prediction** <span class="pp">|</span> Given a hospital's characteristics, what ERR should we expect? <span class="pp">|</span> Should CMS flag this hospital for review? <span class="pp">|</span></span>
+<span id="cb15-101"><a href="#cb15-101" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **Inference** <span class="pp">|</span> Is this hospital's ERR of 1.05 statistically different from 1.0? <span class="pp">|</span> Should the hospital be fined? <span class="pp">|</span></span>
+<span id="cb15-102"><a href="#cb15-102" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **Causation** <span class="pp">|</span> Do the fines actually reduce readmissions? <span class="pp">|</span> Should CMS continue the penalty program? <span class="pp">|</span></span>
+<span id="cb15-103"><a href="#cb15-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-104"><a href="#cb15-104" aria-hidden="true" tabindex="-1"></a>: {.striped .hover tbl-colwidths="<span class="co">[</span><span class="ot">15,40,45</span><span class="co">]</span>"}</span>
+<span id="cb15-105"><a href="#cb15-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-106"><a href="#cb15-106" aria-hidden="true" tabindex="-1"></a>These four modes — **summary, prediction, inference, and causation** — form the backbone of applied statistics. Each one requires different tools and answers a fundamentally different kind of question.</span>
+<span id="cb15-107"><a href="#cb15-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-108"><a href="#cb15-108" aria-hidden="true" tabindex="-1"></a>**Summary** asks: *what happened?* You compute statistics, make plots, and describe the data as it is. Later in this chapter, we'll do exactly that — loading hospital data, counting conditions with <span class="in">`value_counts()`</span>, and plotting the ERR distribution. Summary is the starting point, but it's not the end. A histogram tells you what the data looks like; it doesn't tell you what to do about it.</span>
+<span id="cb15-109"><a href="#cb15-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-110"><a href="#cb15-110" aria-hidden="true" tabindex="-1"></a>**Prediction** asks: *what will happen next?* Given a new hospital's patient mix, neighborhood, and staffing levels, what ERR should we expect? Prediction doesn't require understanding *why* — a model can predict accurately without explaining the mechanism. In Act 1, we'll build prediction models using regression, feature engineering, and decision trees.</span>
+<span id="cb15-111"><a href="#cb15-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-112"><a href="#cb15-112" aria-hidden="true" tabindex="-1"></a>**Inference** asks: *what can we conclude about the population?* If a hospital's ERR is 1.05, is that a real signal or just noise from a small sample? Inference quantifies uncertainty — it tells you how confident to be. Consider the Pfizer vaccine trial: the prediction is that the vaccine works (8 cases vs. 162 in 43,000 patients). But should we authorize it for hundreds of millions of people based on one trial? Inference answers that question — by telling us how likely the observed result would be if the vaccine had no effect. In Act 2, we'll build the tools for inference: confidence intervals, hypothesis tests, and p-values.</span>
+<span id="cb15-113"><a href="#cb15-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-114"><a href="#cb15-114" aria-hidden="true" tabindex="-1"></a>**Causation** asks: *what would happen if we intervened?* Does fining hospitals actually reduce readmissions — or do penalized hospitals just learn to game the metrics? Causal questions are the hardest because correlation doesn't imply causation. Observing that fined hospitals improve doesn't prove the fine caused the improvement — maybe those hospitals were already investing in quality. The comparison may be **confounded** by other changes happening at the same time. We'll define and study confounding starting in Chapter 2. In Act 3, we'll develop frameworks for causal reasoning.</span>
+<span id="cb15-115"><a href="#cb15-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-116"><a href="#cb15-116" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip}</span>
+<span id="cb15-117"><a href="#cb15-117" aria-hidden="true" tabindex="-1"></a><span class="fu">## Think about it</span></span>
+<span id="cb15-118"><a href="#cb15-118" aria-hidden="true" tabindex="-1"></a>Pick one of the ten questions from the opening table. Which of the four modes — summary, prediction, inference, or causation — does it primarily involve? Most involve more than one.</span>
+<span id="cb15-119"><a href="#cb15-119" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-120"><a href="#cb15-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-121"><a href="#cb15-121" aria-hidden="true" tabindex="-1"></a>Each mode builds on the last. You can't predict without first summarizing. You can't infer without a prediction model. And you can't reason about causation without understanding what inference can and can't tell you. The three acts of this course follow this progression.</span>
+<span id="cb15-122"><a href="#cb15-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-123"><a href="#cb15-123" aria-hidden="true" tabindex="-1"></a><span class="fu">## The three acts of this course</span></span>
+<span id="cb15-124"><a href="#cb15-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-125"><a href="#cb15-125" aria-hidden="true" tabindex="-1"></a>The course follows a three-act structure. Each act builds on the last:</span>
+<span id="cb15-126"><a href="#cb15-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-127"><a href="#cb15-127" aria-hidden="true" tabindex="-1"></a>**Act 1: Build Models** (Chapters 1–7) — Explore data, clean it, and build predictive models. We'll use regression, feature engineering, and decision trees on real datasets.</span>
+<span id="cb15-128"><a href="#cb15-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-129"><a href="#cb15-129" aria-hidden="true" tabindex="-1"></a>**Act 2: Trust Models** (Chapters 8–12) — Sampling, hypothesis testing, and regression inference. We'll ask: how precise are our estimates? Is the drug effect real? Which coefficients matter?</span>
+<span id="cb15-130"><a href="#cb15-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-131"><a href="#cb15-131" aria-hidden="true" tabindex="-1"></a>**Act 3: See Further** (Chapters 13–19) — Classification, PCA, clustering, time series, tree-based methods, and causal inference. We'll move from "what happened" to "why."</span>
+<span id="cb15-132"><a href="#cb15-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-133"><a href="#cb15-133" aria-hidden="true" tabindex="-1"></a>Acts 1–3 correspond to the four modes of reasoning: Act 1 covers summary and prediction, Act 2 covers inference, and Act 3 adds causation.</span>
+<span id="cb15-134"><a href="#cb15-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-135"><a href="#cb15-135" aria-hidden="true" tabindex="-1"></a>We'll see the ten questions from the opening recur throughout the course:</span>
+<span id="cb15-136"><a href="#cb15-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-137"><a href="#cb15-137" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Question <span class="pp">|</span> Topics <span class="pp">|</span> Act <span class="pp">|</span></span>
+<span id="cb15-138"><a href="#cb15-138" aria-hidden="true" tabindex="-1"></a><span class="pp">|----------|--------|-----|</span></span>
+<span id="cb15-139"><a href="#cb15-139" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Hospital readmission penalties <span class="pp">|</span> EDA, hypothesis testing <span class="pp">|</span> I → II <span class="pp">|</span></span>
+<span id="cb15-140"><a href="#cb15-140" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> NBA shot selection <span class="pp">|</span> EDA, conditional expected value <span class="pp">|</span> I <span class="pp">|</span></span>
+<span id="cb15-141"><a href="#cb15-141" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Wealthfront tax-loss harvesting <span class="pp">|</span> Optimization, regression <span class="pp">|</span> I <span class="pp">|</span></span>
+<span id="cb15-142"><a href="#cb15-142" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> WFP food allocation <span class="pp">|</span> Linear algebra, optimization <span class="pp">|</span> I <span class="pp">|</span></span>
+<span id="cb15-143"><a href="#cb15-143" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> NextEra solar farm siting <span class="pp">|</span> Feature engineering, regression <span class="pp">|</span> I <span class="pp">|</span></span>
+<span id="cb15-144"><a href="#cb15-144" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Pfizer vaccine efficacy <span class="pp">|</span> Hypothesis testing, multiple testing <span class="pp">|</span> II <span class="pp">|</span></span>
+<span id="cb15-145"><a href="#cb15-145" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> NC gerrymandering <span class="pp">|</span> Permutation tests, simulation <span class="pp">|</span> II <span class="pp">|</span></span>
+<span id="cb15-146"><a href="#cb15-146" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Zillow's iBuying algorithm <span class="pp">|</span> Regression, prediction intervals, backtesting <span class="pp">|</span> I → II <span class="pp">|</span></span>
+<span id="cb15-147"><a href="#cb15-147" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> COMPAS bail scores <span class="pp">|</span> Classification, fairness <span class="pp">|</span> III <span class="pp">|</span></span>
+<span id="cb15-148"><a href="#cb15-148" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Netflix recommendations <span class="pp">|</span> PCA, SVD, matrix completion <span class="pp">|</span> III <span class="pp">|</span></span>
+<span id="cb15-149"><a href="#cb15-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-150"><a href="#cb15-150" aria-hidden="true" tabindex="-1"></a>: {.striped .hover tbl-colwidths="<span class="co">[</span><span class="ot">30,40,30</span><span class="co">]</span>"}</span>
+<span id="cb15-151"><a href="#cb15-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-152"><a href="#cb15-152" aria-hidden="true" tabindex="-1"></a><span class="fu">## A first look at real data</span></span>
+<span id="cb15-153"><a href="#cb15-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-154"><a href="#cb15-154" aria-hidden="true" tabindex="-1"></a>Let's put these ideas to work on a real dataset. The Centers for Medicare &amp; Medicaid Services (CMS) tracks how often patients are readmitted to hospitals within 30 days of discharge. Hospitals with "too many" readmissions get fined.</span>
+<span id="cb15-155"><a href="#cb15-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-156"><a href="#cb15-156" aria-hidden="true" tabindex="-1"></a>We load the data with <span class="in">`pd.read_csv()`</span> and inspect the first few rows with <span class="in">`.head()`</span>:</span>
+<span id="cb15-157"><a href="#cb15-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-160"><a href="#cb15-160" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb15-161"><a href="#cb15-161" aria-hidden="true" tabindex="-1"></a><span class="co"># Load hospital readmissions data</span></span>
+<span id="cb15-162"><a href="#cb15-162" aria-hidden="true" tabindex="-1"></a>readmissions <span class="op">=</span> pd.read_csv(<span class="ss">f'</span><span class="sc">{</span>DATA_DIR<span class="sc">}</span><span class="ss">/hospital-readmissions/hrrp_full.csv'</span>)</span>
+<span id="cb15-163"><a href="#cb15-163" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Shape: </span><span class="sc">{</span>readmissions<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">:,}</span><span class="ss"> rows × </span><span class="sc">{</span>readmissions<span class="sc">.</span>shape[<span class="dv">1</span>]<span class="sc">}</span><span class="ss"> columns"</span>)</span>
+<span id="cb15-164"><a href="#cb15-164" aria-hidden="true" tabindex="-1"></a>readmissions.head(<span class="dv">10</span>)</span>
+<span id="cb15-165"><a href="#cb15-165" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-166"><a href="#cb15-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-167"><a href="#cb15-167" aria-hidden="true" tabindex="-1"></a>Each row is one hospital-condition pair. The table above is a **DataFrame** — the fundamental data structure in data science. Nearly every dataset you'll encounter lives in a DataFrame.</span>
+<span id="cb15-168"><a href="#cb15-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-169"><a href="#cb15-169" aria-hidden="true" tabindex="-1"></a><span class="fu">### Selecting a column</span></span>
+<span id="cb15-170"><a href="#cb15-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-171"><a href="#cb15-171" aria-hidden="true" tabindex="-1"></a>To grab a single column from a DataFrame, use bracket notation:</span>
+<span id="cb15-172"><a href="#cb15-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-175"><a href="#cb15-175" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb15-176"><a href="#cb15-176" aria-hidden="true" tabindex="-1"></a><span class="co"># Select one column — this returns a Series</span></span>
+<span id="cb15-177"><a href="#cb15-177" aria-hidden="true" tabindex="-1"></a>readmissions[<span class="st">'Measure Name'</span>]</span>
+<span id="cb15-178"><a href="#cb15-178" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-179"><a href="#cb15-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-180"><a href="#cb15-180" aria-hidden="true" tabindex="-1"></a>The expression <span class="in">`readmissions['Measure Name']`</span> pulls out one column as a **Series** — a labeled array of values. This move — selecting a column from a DataFrame — is one you'll use constantly.</span>
+<span id="cb15-181"><a href="#cb15-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-182"><a href="#cb15-182" aria-hidden="true" tabindex="-1"></a><span class="fu">### Counting categories</span></span>
+<span id="cb15-183"><a href="#cb15-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-184"><a href="#cb15-184" aria-hidden="true" tabindex="-1"></a>What conditions are tracked?</span>
+<span id="cb15-185"><a href="#cb15-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-188"><a href="#cb15-188" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb15-189"><a href="#cb15-189" aria-hidden="true" tabindex="-1"></a>readmissions[<span class="st">'Measure Name'</span>].value_counts()</span>
+<span id="cb15-190"><a href="#cb15-190" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-191"><a href="#cb15-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-192"><a href="#cb15-192" aria-hidden="true" tabindex="-1"></a><span class="in">`value_counts()`</span> tallies each unique value. Six medical conditions, each measured across thousands of hospitals.</span>
+<span id="cb15-193"><a href="#cb15-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-194"><a href="#cb15-194" aria-hidden="true" tabindex="-1"></a><span class="fu">### Summarizing a numeric column</span></span>
+<span id="cb15-195"><a href="#cb15-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-196"><a href="#cb15-196" aria-hidden="true" tabindex="-1"></a>:::{.callout-important}</span>
+<span id="cb15-197"><a href="#cb15-197" aria-hidden="true" tabindex="-1"></a><span class="fu">## Definition: Excess readmission ratio (ERR)</span></span>
+<span id="cb15-198"><a href="#cb15-198" aria-hidden="true" tabindex="-1"></a>The **Excess Readmission Ratio (ERR)** compares a hospital's predicted readmissions to its expected number, after adjusting for patient risk. A value above 1.0 means more readmissions than expected.</span>
+<span id="cb15-199"><a href="#cb15-199" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-200"><a href="#cb15-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-203"><a href="#cb15-203" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb15-204"><a href="#cb15-204" aria-hidden="true" tabindex="-1"></a>readmissions[<span class="st">'Excess Readmission Ratio'</span>].describe()</span>
+<span id="cb15-205"><a href="#cb15-205" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-206"><a href="#cb15-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-207"><a href="#cb15-207" aria-hidden="true" tabindex="-1"></a>The mean is close to 1.0 — most hospitals are near the expected rate. But the spread tells the real story: some hospitals are well above or below.</span>
+<span id="cb15-208"><a href="#cb15-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-209"><a href="#cb15-209" aria-hidden="true" tabindex="-1"></a><span class="fu">### Visualizing a distribution</span></span>
+<span id="cb15-210"><a href="#cb15-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-211"><a href="#cb15-211" aria-hidden="true" tabindex="-1"></a>Before plotting, note that some ERR values are missing. The <span class="in">`.dropna()`</span> call below removes them — always check how many are absent before dropping:</span>
+<span id="cb15-212"><a href="#cb15-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-215"><a href="#cb15-215" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb15-216"><a href="#cb15-216" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Missing ERR values: </span><span class="sc">{</span>readmissions[<span class="st">'Excess Readmission Ratio'</span>]<span class="sc">.</span>isna()<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">:,}</span><span class="ss"> "</span></span>
+<span id="cb15-217"><a href="#cb15-217" aria-hidden="true" tabindex="-1"></a>      <span class="ss">f"out of </span><span class="sc">{</span><span class="bu">len</span>(readmissions)<span class="sc">:,}</span><span class="ss">"</span>)</span>
+<span id="cb15-218"><a href="#cb15-218" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-219"><a href="#cb15-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-220"><a href="#cb15-220" aria-hidden="true" tabindex="-1"></a>Now we use <span class="in">`sns.histplot()`</span> to visualize the distribution:</span>
+<span id="cb15-221"><a href="#cb15-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-224"><a href="#cb15-224" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb15-225"><a href="#cb15-225" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb15-226"><a href="#cb15-226" aria-hidden="true" tabindex="-1"></a>sns.histplot(readmissions[<span class="st">'Excess Readmission Ratio'</span>].dropna(), bins<span class="op">=</span><span class="dv">50</span>, ax<span class="op">=</span>ax,</span>
+<span id="cb15-227"><a href="#cb15-227" aria-hidden="true" tabindex="-1"></a>             edgecolor<span class="op">=</span><span class="st">'white'</span>)</span>
+<span id="cb15-228"><a href="#cb15-228" aria-hidden="true" tabindex="-1"></a>ax.axvline(x<span class="op">=</span><span class="fl">1.0</span>, color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'Expected = 1.0'</span>)</span>
+<span id="cb15-229"><a href="#cb15-229" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Excess readmission ratio'</span>)</span>
+<span id="cb15-230"><a href="#cb15-230" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Count'</span>)</span>
+<span id="cb15-231"><a href="#cb15-231" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Hospital readmission performance across the U.S.'</span>)</span>
+<span id="cb15-232"><a href="#cb15-232" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb15-233"><a href="#cb15-233" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb15-234"><a href="#cb15-234" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb15-235"><a href="#cb15-235" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-236"><a href="#cb15-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-237"><a href="#cb15-237" aria-hidden="true" tabindex="-1"></a>The distribution is centered near 1.0, with real spread. Hospitals to the right of the red line have more readmissions than expected.</span>
+<span id="cb15-238"><a href="#cb15-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-239"><a href="#cb15-239" aria-hidden="true" tabindex="-1"></a><span class="fu">### Filtering rows</span></span>
+<span id="cb15-240"><a href="#cb15-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-241"><a href="#cb15-241" aria-hidden="true" tabindex="-1"></a>What if we want to focus on just one condition? Use boolean filtering:</span>
+<span id="cb15-242"><a href="#cb15-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-245"><a href="#cb15-245" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb15-246"><a href="#cb15-246" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter to heart failure only</span></span>
+<span id="cb15-247"><a href="#cb15-247" aria-hidden="true" tabindex="-1"></a>heart_failure <span class="op">=</span> readmissions[readmissions[<span class="st">'Measure Name'</span>] <span class="op">==</span> <span class="st">'READM-30-HF-HRRP'</span>]</span>
+<span id="cb15-248"><a href="#cb15-248" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Heart failure rows: </span><span class="sc">{</span>heart_failure<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">:,}</span><span class="ss">"</span>)</span>
+<span id="cb15-249"><a href="#cb15-249" aria-hidden="true" tabindex="-1"></a>heart_failure[[<span class="st">'Facility Name'</span>, <span class="st">'State'</span>, <span class="st">'Excess Readmission Ratio'</span>]].head()</span>
+<span id="cb15-250"><a href="#cb15-250" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-251"><a href="#cb15-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-252"><a href="#cb15-252" aria-hidden="true" tabindex="-1"></a>The expression inside the brackets — <span class="in">`readmissions['Measure Name'] == 'READM-30-HF-HRRP'`</span> — produces a True/False value for each row. Only the True rows are kept. Boolean filtering — selecting rows that satisfy a condition — is a fundamental pandas operation.</span>
+<span id="cb15-253"><a href="#cb15-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-254"><a href="#cb15-254" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip}</span>
+<span id="cb15-255"><a href="#cb15-255" aria-hidden="true" tabindex="-1"></a><span class="fu">## Think about it</span></span>
+<span id="cb15-256"><a href="#cb15-256" aria-hidden="true" tabindex="-1"></a>If you ran a hospital and your heart failure ERR was 1.05, would you worry? How would you decide if that number reflects a real quality problem or just random variation? That's a statistics question — and one we'll answer in Act 2.</span>
+<span id="cb15-257"><a href="#cb15-257" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-258"><a href="#cb15-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-259"><a href="#cb15-259" aria-hidden="true" tabindex="-1"></a><span class="fu">## Key takeaways</span></span>
+<span id="cb15-260"><a href="#cb15-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-261"><a href="#cb15-261" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Applied statistics is about decisions under uncertainty**, not formulas in a vacuum.</span>
+<span id="cb15-262"><a href="#cb15-262" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The same dataset supports four different modes of reasoning: **summary** (what happened?), **prediction** (what will happen?), **inference** (what can we conclude?), and **causation** (what would happen if we intervened?).</span>
+<span id="cb15-263"><a href="#cb15-263" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Each mode requires different tools and answers a different kind of question. The three acts of this course build them in sequence.</span>
+<span id="cb15-264"><a href="#cb15-264" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Any analysis — from an AI, a colleague, or your own first pass — deserves skepticism. Your job is to verify.</span>
+<span id="cb15-265"><a href="#cb15-265" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Every dataset has a story. Learning to read that story — and question it — is the core skill of a statistician.</span>
+<span id="cb15-266"><a href="#cb15-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-267"><a href="#cb15-267" aria-hidden="true" tabindex="-1"></a><span class="fu">## Study guide</span></span>
+<span id="cb15-268"><a href="#cb15-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-269"><a href="#cb15-269" aria-hidden="true" tabindex="-1"></a><span class="fu">### Key ideas</span></span>
+<span id="cb15-270"><a href="#cb15-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-271"><a href="#cb15-271" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Applied statistics** is the science of making decisions under uncertainty using data.</span>
+<span id="cb15-272"><a href="#cb15-272" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Four modes of reasoning with data: **summary** (describe what happened), **prediction** (forecast what will happen), **inference** (quantify uncertainty about a conclusion), **causation** (determine what would happen under an intervention).</span>
+<span id="cb15-273"><a href="#cb15-273" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>These four modes map onto the course: summary and prediction in Act 1, inference in Act 2, causation in Act 3.</span>
+<span id="cb15-274"><a href="#cb15-274" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The **Excess Readmission Ratio (ERR)** compares a hospital's readmissions to what's expected given its patient mix. Above 1.0 = more readmissions than expected.</span>
+<span id="cb15-275"><a href="#cb15-275" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Real data is **noisy** (errors, corruption), **missing** (not recorded, suppressed), and **heterogeneous** (numbers, categories, text, networks).</span>
+<span id="cb15-276"><a href="#cb15-276" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A single number without an uncertainty estimate is dangerous — Zillow's $881M loss illustrates why prediction intervals matter.</span>
+<span id="cb15-277"><a href="#cb15-277" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Any quick analysis — from an AI, a script, or a first pass — can produce plausible-looking results that miss critical problems in the data.</span>
+<span id="cb15-278"><a href="#cb15-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-279"><a href="#cb15-279" aria-hidden="true" tabindex="-1"></a><span class="fu">### Computational tools</span></span>
+<span id="cb15-280"><a href="#cb15-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-281"><a href="#cb15-281" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`pd.read_csv()`</span> — load a CSV file into a DataFrame</span>
+<span id="cb15-282"><a href="#cb15-282" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`df['column_name']`</span> — select a single column (returns a Series)</span>
+<span id="cb15-283"><a href="#cb15-283" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`.head()`</span> — peek at the first few rows</span>
+<span id="cb15-284"><a href="#cb15-284" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`.describe()`</span> — summary statistics (mean, std, min, max, quartiles)</span>
+<span id="cb15-285"><a href="#cb15-285" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`.value_counts()`</span> — count unique values in a column</span>
+<span id="cb15-286"><a href="#cb15-286" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`sns.histplot()`</span> — plot a histogram</span>
+<span id="cb15-287"><a href="#cb15-287" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`df[df['col'] == value]`</span> — filter rows by a condition (boolean indexing)</span>
+<span id="cb15-288"><a href="#cb15-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-289"><a href="#cb15-289" aria-hidden="true" tabindex="-1"></a><span class="fu">### For the quiz</span></span>
+<span id="cb15-290"><a href="#cb15-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-291"><a href="#cb15-291" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>No quiz this week, but expect one every Wednesday starting next week. The quizzes are closed-book, closed-notes, and designed to test your understanding of the key ideas and tools from the lectures. They often involve interpreting code snippets, analyzing data outputs, or applying concepts to new scenarios. The best way to prepare is to review the lecture notes, understand the examples we covered, and practice with the datasets on your own.</span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
